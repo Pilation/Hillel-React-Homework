@@ -53,6 +53,7 @@ export default class TodoList extends Component {
               className={el.completed ? "js-completed" : ""}
               arrLi={this.state.todos}
               RemoveLi={this.RemoveLi}
+              value={this.state.newTodo}
             />
           ))}
         </ul>
