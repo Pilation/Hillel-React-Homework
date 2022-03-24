@@ -1,0 +1,7 @@
+.js-TodoList ul li {
+  background-color: yellow;
+}
+
+.js-TodoList ul .js-completed {
+  background-color: lightgreen;
+}
