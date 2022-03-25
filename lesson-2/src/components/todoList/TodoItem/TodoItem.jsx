@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import "./style.css";
 
 export default class TodoItem extends Component {
-  state = {};
   render() {
-    const { text, className, id, RemoveLi } = this.props;
+    const { text, className, id, onClickRemoveLi } = this.props;
     return (
-      <li className={className} id={id}>
+      <li className={className}>
         <span>{text}</span>
-        <button type="button" onClick={() => RemoveLi(id)}>
+        <button type="button" onClick={() => onClickRemoveLi(id)}>
           delete
         </button>
       </li>

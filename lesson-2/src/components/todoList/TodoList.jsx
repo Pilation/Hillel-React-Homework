@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./style.css";
 import TodoItem from "./TodoItem/TodoItem";
-import TodoInput from "./todoInput/TodoInput";
+import TodoInput from "./TodoInput/TodoInput";
 
 export default class TodoList extends Component {
   state = {
@@ -35,9 +35,9 @@ export default class TodoList extends Component {
   };
   constructor() {
     super();
-    this.InputChange = this.InputChange.bind(this);
-    this.RemoveLi = this.RemoveLi.bind(this);
-    this.OnSubmit = this.OnSubmit.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
+    this.onClickRemoveLi = this.onClickRemoveLi.bind(this);
+    this.onSubmitAddLi = this.onSubmitAddLi.bind(this);
   }
   render() {
     const { todos } = this.state;
@@ -52,23 +52,26 @@ export default class TodoList extends Component {
               id={el.id}
               className={el.completed ? "js-completed" : ""}
               arrLi={this.state.todos}
-              RemoveLi={this.RemoveLi}
+              onClickRemoveLi={this.onClickRemoveLi}
               value={this.state.newTodo}
             />
           ))}
         </ul>
-        <TodoInput InputChange={this.InputChange} OnSubmit={this.OnSubmit} />
+        <TodoInput
+          onInputChange={this.onInputChange}
+          onSubmitAddLi={this.onSubmitAddLi}
+        />
       </div>
     );
   }
-  RemoveLi(id) {
+  onClickRemoveLi(id) {
     const newTodos = this.state.todos.filter((todo) => todo.id !== id);
     this.setState({ todos: newTodos });
   }
-  InputChange(e) {
+  onInputChange(e) {
     this.setState({ newTodo: e.target.value });
   }
-  OnSubmit(e) {
+  onSubmitAddLi(e) {
     e.preventDefault();
     let newTodo = {
       id: (
