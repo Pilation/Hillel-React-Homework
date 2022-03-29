@@ -1,16 +1,10 @@
 import React, { Component } from "react";
 
-import ContactItem from "../Contact-item/ContactItem";
+import ContactItem from "./ContactItem/ContactItem";
 
-export default class ContactList extends Component {
-  state = {
-    //
-  };
-  constructor() {
-    super();
-  }
+export default class ContactTable extends Component {
   render() {
-    const { contacts, RemoveLi } = this.props;
+    const { contacts, onClickRemoveLi } = this.props;
     return (
       <ul className="js-ContactList">
         {contacts
@@ -18,11 +12,11 @@ export default class ContactList extends Component {
               <ContactItem
                 key={contact.id}
                 name={contact.name}
-                surname={contact.sername}
+                surname={contact.surname}
                 phone={contact.phone}
                 id={contact.id}
                 className={`js-ContactItem`}
-                RemoveLi={RemoveLi}
+                onClickRemoveLi={onClickRemoveLi}
               />
             ))
           : ""}

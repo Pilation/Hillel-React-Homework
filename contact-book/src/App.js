@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 // import './App.css';
-import ContactBook from "./components/Contact-book/ContactBook";
+import ContactBook from "./components/ContactBook/ContactBook";
 //
 
 function App() {
