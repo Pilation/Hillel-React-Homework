@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-
 import ContactItem from "./ContactItem/ContactItem";
-
 export default class ContactTable extends Component {
   render() {
     const { contacts, onClickRemoveLi } = this.props;
