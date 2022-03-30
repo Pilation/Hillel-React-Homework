@@ -72,7 +72,7 @@ export default class ContactBook extends Component {
     }
     return newObj;
   }
-  changesToAPI(file, method = "GET", obj) {
+  changesToAPI(URL, method = "GET", obj) {
     let options = {
       method: method,
       headers: {
@@ -82,13 +82,13 @@ export default class ContactBook extends Component {
     if (obj) {
       options.body = JSON.stringify(obj);
     }
-    fetch(file, options)
+    fetch(URL, options)
       .then((resp) => resp.json())
       .then(() => this.updateStateFromAPI(this.contactsBase));
   }
 
-  updateStateFromAPI(file) {
-    fetch(file)
+  updateStateFromAPI(URL) {
+    fetch(URL)
       .then((resp) => resp.json())
       .then((data) => this.setState({ contacts: data }))
       .then(() => {
