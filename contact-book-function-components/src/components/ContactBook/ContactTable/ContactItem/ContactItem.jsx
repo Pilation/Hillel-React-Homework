@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ContactForm from "../../ContactForm/ContactForm";
 export default function ContactItem(props) {
   const { contactData, fields, ApiDeleteAndUpdate, ApiPutAndUpdate } = props;

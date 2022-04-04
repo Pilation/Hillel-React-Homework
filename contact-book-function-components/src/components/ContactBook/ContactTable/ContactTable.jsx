@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import ContactItem from "./ContactItem/ContactItem";
 export default function ContactTable(props) {
   const { contacts, ApiDeleteAndUpdate, ApiPutAndUpdate, fields } = props;

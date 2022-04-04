@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ContactFormInput from "./ContactFormInput/ContactFormInput";
 
 export default function ContactForm(props) {
@@ -10,8 +10,6 @@ export default function ContactForm(props) {
     onSubmitReturnToTable,
   } = props;
   const [newContact, setNewContact] = useState(contactTemplate);
-  const [inputsNewContactAdded, setinputsNewContactAdded] = useState(false);
-  const [editModeEnabled, setEditModeEnabled] = useState(false);
 
   const clearObj = (obj) => {
     let newObj = JSON.parse(JSON.stringify(obj));
