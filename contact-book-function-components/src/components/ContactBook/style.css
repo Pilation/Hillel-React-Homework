@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+}
+#root {
+}
+.project-description {
+  margin: 0 auto;
+  max-width: 80%;
+  text-align: center;
+  overflow-wrap: break-word;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+
+.js-ContactBook {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 16px;
+
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 80px 0;
+
+  width: fit-content;
+}
+
+.js-ContactBook h1 {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.js-ContactBook button {
+  display: block;
+  min-width: 60px;
+  padding: 5px;
+  font-weight: bold;
+  background-color: lightcoral;
+  color: #fff;
+  outline: none;
+  border: 1px solid salmon;
+  border-radius: 5px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+button.js-Switcher {
+  position: relative;
+  font-size: 20px;
+  padding: 20px;
+  text-transform: uppercase;
+  margin: 20px 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.js-ContactBook span,
+.js-ContactBook label,
+.js-ContactBook input {
+  display: block;
+  max-width: 80%;
+  overflow-wrap: break-word;
+}
+
+.js-ContactList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  border: 1px solid #000;
+  border-bottom: none;
+}
+.js-ContactList li:first-child {
+  border-radius: 5px 5px 0 0;
+}
+.js-ContactList li:last-child {
+  border-radius: 0 0 5px 5px;
+  border-bottom: 1px solid #000;
+}
+
+.js-ContactItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.js-ContactItem div {
+  width: 210px;
+  min-height: 85px;
+  padding: 10px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #000;
+  gap: 10px;
+}
+.js-ContactItem div:first-child {
+  border-left: 1px solid #000;
+}
+.js-ContactItem div:last-child {
+  border-right: none;
+}
+
+.js-ContactItem input {
+  padding: 5px;
+}
+
+.js-ContactItem span:first-child,
+.js-ContactItem label {
+  font-style: italic;
+}
+
+.js-Contact-form-post {
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 10px;
+}
+.js-Contact-form-post div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+.js-Contact-form-post label {
+  display: block;
+  width: 100%;
+  max-width: 100px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.js-Contact-form-post input {
+  display: block;
+  min-width: 200px;
+  width: 100%;
+  padding: 5px;
+}
+
+.js-Contact-form-post button {
+  margin: 0 auto;
+}
+.js-Contact-form-post button:last-child {
+  margin-top: 10px;
+}
