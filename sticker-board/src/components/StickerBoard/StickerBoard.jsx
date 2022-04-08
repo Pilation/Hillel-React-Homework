@@ -14,7 +14,7 @@ export default function StickerBoard() {
   }, []);
 
   // features
-  const getRandomColor = useCallback(() => {
+  const getRandomColor = () => {
     let uniqueColors = new Set();
     stickers.forEach((e) => {
       uniqueColors.add(e.color);
@@ -30,9 +30,9 @@ export default function StickerBoard() {
       uniqueColorsArr[getRandomIntInclusive(0, uniqueColorsArr.length - 1)];
     console.log(randomColor);
     return randomColor;
-  }, [stickers]);
+  };
 
-  const GetDate = useCallback((dateString = ``) => {
+  const GetDate = (dateString = ``) => {
     const addZero = (number, threshold) => {
       return number < threshold ? `0` + number : number;
     };
@@ -50,7 +50,7 @@ export default function StickerBoard() {
       ":" +
       addZero(dateObj.getSeconds(), 10);
     return date + ` ` + time;
-  }, []);
+  };
 
   const clearObj = (obj) => {
     let newObj = JSON.parse(JSON.stringify(obj));
