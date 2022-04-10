@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 export default function StickerItem(props) {
-  const { data, className, onClick, onMouseLeave, onInputChange, date } = props;
-  const { id, color, description } = data;
+  const { data, className, onClick, onBlur, onInputChange, date } = props;
+  const { id, color } = data;
   const [input, setInput] = useState(data);
 
   return (
@@ -10,9 +10,6 @@ export default function StickerItem(props) {
       className={className}
       style={{
         backgroundColor: color,
-      }}
-      onMouseLeave={() => {
-        onMouseLeave(description, input, id);
       }}
     >
       <div>
@@ -24,6 +21,7 @@ export default function StickerItem(props) {
         onChange={(e) => {
           setInput(onInputChange(e, input));
         }}
+        onBlur={() => onBlur(input, id)}
       />
     </li>
   );

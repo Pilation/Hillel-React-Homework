@@ -1,12 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import "./style.css";
 import { APIget, APIpost, APIput, APIdelete } from "../../services/services";
 import StickerItem from "./StickerItem";
 import StickerNewItem from "./StickerNewItem";
+import StickerFilter from "./StickerFilter";
 import { useAPImethod } from "../../hooks/common";
 
 export default function StickerBoard() {
   const [stickers, setStickers] = useState([]);
+  const [filter, setFilter] = useState("default");
   const { runAPImethod, status } = useAPImethod(APIget, setStickers);
 
   useEffect(() => {
@@ -28,15 +30,14 @@ export default function StickerBoard() {
     }
     const randomColor =
       uniqueColorsArr[getRandomIntInclusive(0, uniqueColorsArr.length - 1)];
-    console.log(randomColor);
     return randomColor;
   };
 
-  const GetDate = (dateString = ``) => {
+  const GetDateString = (dateString) => {
     const addZero = (number, threshold) => {
       return number < threshold ? `0` + number : number;
     };
-    const dateObj = dateString ? new Date(dateString) : new Date();
+    const dateObj = new Date(dateString);
     let date =
       dateObj.getFullYear() +
       "-" +
@@ -52,6 +53,10 @@ export default function StickerBoard() {
     return date + ` ` + time;
   };
 
+  const GetISOdateNow = () => {
+    return new Date().toISOString();
+  };
+
   const clearObj = (obj) => {
     let newObj = JSON.parse(JSON.stringify(obj));
     for (const key in newObj) {
@@ -60,7 +65,32 @@ export default function StickerBoard() {
     return newObj;
   };
 
-  // events
+  const SortArrayByDate = (array) => {
+    if (array.length > 0) {
+      let SortedStickerDates = array
+        .map((e) => new Date(e.date))
+        .sort((a, b) => a - b)
+        .map((e) => e.toISOString());
+      let SottedStickers = [];
+      SortedStickerDates.forEach((elem) => {
+        SottedStickers.push(array.find((e) => e.date === elem));
+      });
+      return SottedStickers;
+    }
+  };
+  // features
+
+  const SortedStickers = useMemo(() => {
+    switch (filter) {
+      case "older":
+        return SortArrayByDate(stickers);
+      case "newer":
+        return SortArrayByDate(stickers).reverse();
+      default:
+        return stickers;
+    }
+  }, [stickers, filter]);
+
   const onClickDelete = useCallback((id) => {
     runAPImethod(APIdelete, { id: id });
   }, []);
@@ -71,17 +101,15 @@ export default function StickerBoard() {
     return newInput;
   };
 
-  const onMouseLeavePUT = useCallback((initialData, obj, id) => {
-    if (initialData !== obj.description) {
-      obj.date = GetDate();
-      runAPImethod(APIput, { obj: obj, id: id });
-    }
+  const onBlurPut = useCallback((obj, id) => {
+    obj.date = GetISOdateNow();
+    runAPImethod(APIput, { obj: obj, id: id });
   }, []);
 
-  const onSubmitPOST = useCallback((e, obj) => {
+  const onSubmitPost = useCallback((e, obj) => {
     e.preventDefault();
     obj.color = getRandomColor();
-    obj.date = GetDate();
+    obj.date = GetISOdateNow();
     runAPImethod(APIpost, { obj: obj });
     return clearObj(obj);
   }, []);
@@ -90,21 +118,26 @@ export default function StickerBoard() {
   return (
     <div className="StickerBoard">
       <h2>status:{status.status}</h2>
+      <StickerFilter
+        filter={filter}
+        setFilter={setFilter}
+        className={"StickerFilter"}
+      />
       <ul className="Sticker__list">
-        {stickers.map((sticker) => (
+        {SortedStickers.map((sticker) => (
           <StickerItem
             data={sticker}
-            date={GetDate(sticker.date)}
+            date={GetDateString(sticker.date)}
             key={sticker.id}
             className="Sticker__card"
             onClick={onClickDelete}
-            onMouseLeave={onMouseLeavePUT}
+            onBlur={onBlurPut}
             onInputChange={onInputChange}
           />
         ))}
         <StickerNewItem
           data={{ description: "" }}
-          onSubmit={onSubmitPOST}
+          onSubmit={onSubmitPost}
           placeholder={`New sticker`}
           className="Sticker__AddNew"
           onInputChange={onInputChange}

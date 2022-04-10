@@ -15,13 +15,23 @@
   padding: 50px 20px;
 }
 
+.StickerFilter {
+  margin: 20px auto;
+  display: block;
+  min-width: 60px;
+  width: fit-content;
+  border-radius: 5px;
+  padding: 5px;
+  outline: none;
+}
+
 .StickerBoard h2 {
   display: block;
   width: 100%;
   text-align: center;
   font-size: 14px;
   color: darkgray;
-  padding: 20px 0;
+  margin: 20px auto;
 }
 
 .Sticker__list {
