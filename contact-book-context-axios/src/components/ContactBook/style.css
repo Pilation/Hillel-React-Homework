@@ -1,0 +1,198 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  outline: none;
+}
+
+:root {
+  --background: #fff;
+  --main: #000000cc;
+  --buttonBackground: #fa8072;
+  --buttonText: #fff;
+}
+
+.project-description {
+  margin: 0 auto;
+  max-width: 80%;
+  text-align: center;
+  overflow-wrap: break-word;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+
+.js-ContactBook {
+  transition: all 0.5s;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  width: 100%;
+  padding: 80px 50px;
+  font-size: 16px;
+  color: var(--main);
+  background-color: var(--background);
+}
+
+.js-ContactBook h1 {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.js-ContactBook button {
+  display: block;
+  min-width: 60px;
+  padding: 5px;
+  font-weight: bold;
+  background-color: var(--buttonBackground);
+  color: var(--buttonText);
+  outline: none;
+  border: 1px solid var(--main);
+  border-radius: 5px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+button.js-Switcher {
+  position: relative;
+  font-size: 20px;
+  padding: 20px;
+  text-transform: uppercase;
+  margin: 20px 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.js-ContactBook span:not(.theme-switcher span),
+.js-ContactBook label:not(.theme-switcher),
+.js-ContactBook input {
+  display: block;
+  max-width: 80%;
+  overflow-wrap: break-word;
+}
+
+.js-ContactList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  border: 1px solid var(--main);
+  border-bottom: none;
+}
+.js-ContactList li:first-child {
+  border-radius: 5px 5px 0 0;
+}
+.js-ContactList li:last-child {
+  border-radius: 0 0 5px 5px;
+  border-bottom: 1px solid var(--main);
+}
+
+.js-ContactItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.js-ContactItem div {
+  width: 210px;
+  min-height: 85px;
+  padding: 10px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--main);
+  gap: 10px;
+}
+.js-ContactItem div:first-child {
+  border-left: 1px solid var(--main);
+}
+.js-ContactItem div:last-child {
+  border-right: none;
+}
+
+.js-ContactItem input {
+  padding: 5px;
+}
+
+.js-ContactItem span:first-child,
+.js-ContactItem label {
+  font-style: italic;
+}
+
+.js-Contact-form-post {
+  width: 100%;
+  border: 1px solid var(--main);
+  border-radius: 5px;
+  padding: 10px;
+}
+.js-Contact-form-post div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+.js-Contact-form-post label {
+  display: block;
+  width: 100%;
+  max-width: 100px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.js-Contact-form-post input {
+  display: block;
+  min-width: 200px;
+  width: 100%;
+  padding: 5px;
+}
+
+.js-Contact-form-post button {
+  margin: 0 auto;
+}
+.js-Contact-form-post button:last-child {
+  margin-top: 10px;
+}
+
+.theme-switcher {
+  margin: 0 auto;
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 34px;
+}
+.theme-switcher input {
+  opacity: 0;
+  width: 0px;
+  height: 0px;
+}
+.theme-switcher span {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--background);
+  transition: 0.4s;
+  border-radius: 34px;
+  width: 100%;
+  border: 1px solid var(--main);
+}
+.theme-switcher span:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--main);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.theme-switcher input:checked + span:before {
+  transform: translateX(24px);
+}
