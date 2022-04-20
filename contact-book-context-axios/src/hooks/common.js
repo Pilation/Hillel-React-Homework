@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import api from "../api/api";
 
-export default function useAPImethod(setState) {
+export default function useAPImethod() {
+  const [contacts, setContacts] = useState([]);
   const [fields, setFields] = useState([]);
   const [contactTemplate, setContactTemplate] = useState({});
 
@@ -9,7 +10,7 @@ export default function useAPImethod(setState) {
     api
       .get("contacts")
       .then(({ data }) => {
-        setState(data);
+        setContacts(data);
         return data;
       })
       .then((data) => {
@@ -43,5 +44,13 @@ export default function useAPImethod(setState) {
     getAndRenderContacts();
   }, []);
 
-  return { deleteContact, addContact, updateContact, fields, contactTemplate };
+  return {
+    deleteContact,
+    addContact,
+    updateContact,
+    fields,
+    contactTemplate,
+    contacts,
+    setContacts,
+  };
 }

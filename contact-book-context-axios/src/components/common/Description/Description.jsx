@@ -1,3 +1,5 @@
+import "./style.css";
+
 export default function ContactDescription(props) {
   return (
     <p className="project-description">

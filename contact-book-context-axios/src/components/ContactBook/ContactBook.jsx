@@ -3,16 +3,27 @@ import "./style.css";
 import ContactForm from "./ContactForm/ContactForm";
 import ContactTable from "./ContactTable/ContactTable";
 import useAPImethod from "../../hooks/common";
-import ContactDescription from "../common/Description";
+import ContactDescription from "../common/Description/Description";
 import ThemeContext from "../../context/ThemeContext";
-import ContactSwitcher from "../common/Switcher";
-import Button from "../common/Button";
+import ContactSwitcher from "../common/Switcher/Switcher";
+import Button from "../common/Button/Button";
 
 export default function ContactBook() {
-  const [contacts, setContacts] = useState([]);
+  // const [contacts, setContacts] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const { deleteContact, addContact, updateContact, fields, contactTemplate } =
-    useAPImethod(setContacts);
+  const {
+    deleteContact,
+    addContact,
+    updateContact,
+    fields,
+    contactTemplate,
+    contacts,
+    setContacts,
+  } = useAPImethod();
+
+  const toggleForm = () => {
+    setShowForm(!showForm);
+  };
 
   return (
     <>
@@ -42,14 +53,8 @@ export default function ContactBook() {
           </>
         )}
         <Button
-          onClick={() => setShowForm(!showForm)}
+          onClick={toggleForm}
           value={!showForm ? "Add new contact" : "Show contacts"}
-          theme={{
-            title: "dark",
-            color: "#fff",
-            backgroundColor: "#000000cc",
-            border: "1px solid #fff",
-          }}
         />
       </div>
     </>

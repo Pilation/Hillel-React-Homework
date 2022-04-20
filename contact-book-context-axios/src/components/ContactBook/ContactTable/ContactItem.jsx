@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ContactForm from "../ContactForm/ContactForm";
+import Button from "../../common/Button/Button";
 export default function ContactItem(props) {
   const { contactData, fields, ApiDeleteAndUpdate, ApiPutAndUpdate } = props;
   const [editMode, setEditMode] = useState(false);
@@ -9,9 +10,10 @@ export default function ContactItem(props) {
 
   return (
     <li>
-      <button onClick={() => setEditMode(!editMode)}>
-        {!editMode ? "Edit" : "Return"}
-      </button>
+      <Button
+        onClick={() => setEditMode(!editMode)}
+        value={!editMode ? "Edit" : "Return"}
+      ></Button>
       {!editMode ? (
         <div className={"js-ContactItem"}>
           {fields.map((field) => (
@@ -20,9 +22,10 @@ export default function ContactItem(props) {
               <span>{contactData[field]}</span>
             </div>
           ))}
-          <button onClick={() => ApiDeleteAndUpdate(contactData.id)}>
-            Delete
-          </button>
+          <Button
+            onClick={() => ApiDeleteAndUpdate(contactData.id)}
+            value="Delete"
+          ></Button>
         </div>
       ) : (
         <ContactForm

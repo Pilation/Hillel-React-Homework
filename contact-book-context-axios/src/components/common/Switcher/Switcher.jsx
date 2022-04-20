@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import ThemeContext from "../../context/ThemeContext";
+import ThemeContext from "../../../context/ThemeContext";
+import "./style.css";
 
 export default function ContactSwitcher() {
   const { toggle } = useContext(ThemeContext);

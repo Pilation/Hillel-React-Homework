@@ -1,7 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import ContactFormInput from "./ContactFormInput";
-import Button from "../../common/Button";
-import ThemeContext from "../../../context/ThemeContext";
+import Button from "../../common/Button/Button";
 
 export default function ContactForm(props) {
   const {
@@ -27,6 +26,7 @@ export default function ContactForm(props) {
     input[e.target.id] = e.target.value;
     setNewContact(input);
   };
+
   const onSubmit = (e) => {
     e.preventDefault();
     onSubmitAPIaction(newContact);
