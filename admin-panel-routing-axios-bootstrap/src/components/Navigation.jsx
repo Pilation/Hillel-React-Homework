@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Row, Col, Container } from "react-bootstrap";
 
 export default function Navigation() {
@@ -7,7 +7,7 @@ export default function Navigation() {
       <Row className="justify-content-md-center">
         <Col xs lg="2" className="d-flex justify-content-center">
           <Link
-            to={"/dashboard"}
+            to="/dashboard"
             className="link-success text-uppercase fs-4 fw-bolder"
           >
             dashboard
@@ -15,7 +15,7 @@ export default function Navigation() {
         </Col>
         <Col xs md="2" className="d-flex justify-content-center">
           <Link
-            to={"/users"}
+            to="/users"
             className="link-primary text-uppercase fs-4 fw-bolder fw-bolder"
           >
             users
@@ -23,7 +23,7 @@ export default function Navigation() {
         </Col>
         <Col xs lg="2" className="d-flex justify-content-center">
           <Link
-            to={"/albums"}
+            to="/albums"
             className="link-secondary text-uppercase fs-4 fw-bolder fw-bolder"
           >
             albums

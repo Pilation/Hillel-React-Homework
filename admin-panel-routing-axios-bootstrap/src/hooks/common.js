@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Container, Row, Col, Accordion } from "react-bootstrap";
+import { Accordion } from "react-bootstrap";
 import api from "../api/api";
 
 export default function useAPImethod(URI) {

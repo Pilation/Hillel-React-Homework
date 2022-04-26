@@ -1,8 +1,7 @@
 import UsersItem from "./ UsersItem";
-// import { useContext, useEffect, useState } from "react";
 import useAPImethod from "../hooks/common";
 import { USERS_URI, ALBUMS_URI } from "../constants";
-import { Container, Row, Col, Accordion } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 
 export default function Users() {
   const { APIelements } = useAPImethod(USERS_URI);
