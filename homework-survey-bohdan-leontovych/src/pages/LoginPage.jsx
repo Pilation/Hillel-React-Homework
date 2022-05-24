@@ -1,4 +1,3 @@
-import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { Paper, TextField, Button, Box } from "@mui/material";
 import { useState } from "react";
@@ -6,12 +5,7 @@ import { Typography } from "@mui/material";
 
 export default function LoginPage() {
   const [name, setName] = useState("");
-
-  const navigate = useNavigate();
-  const location = useLocation();
   const { signin } = useAuth();
-
-  const fromPage = location.state?.from?.pathname || "/";
 
   const handleChange = (e) => {
     setName(e.target.value);
@@ -19,18 +13,21 @@ export default function LoginPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const user = name;
-
-    signin(user, () => navigate(fromPage, { replace: true }));
+    signin(name);
   };
 
   return (
     <Paper
       variant="outlined"
-      sx={{ p: 4, mt: 10, width: "fit-content", mx: "auto" }}
+      sx={{
+        p: 4,
+        mt: 10,
+        width: 500,
+        mx: "auto",
+      }}
     >
       <Typography
-        variant="h3"
+        variant="h4"
         component="h1"
         sx={{ mb: 4 }}
         color="primary"

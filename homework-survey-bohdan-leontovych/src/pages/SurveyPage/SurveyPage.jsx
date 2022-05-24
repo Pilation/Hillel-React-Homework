@@ -1,15 +1,13 @@
 import { useEffect, useState, useCallback } from "react";
-import { Grid, Box, Button, Paper } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../hooks/useAuth";
-
-import { QUESTIONS_URI, ANSWERS_URI } from "../../constants";
 import useQestionsAPI from "../../hooks/useQestionsAPI";
 import SurveyModal from "./SurveyModal";
 import Description from "./Description";
-
 import SurveyCarousel from "./SurveyCarousel";
 
+import { Grid, Box, Button, Paper } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
@@ -19,22 +17,39 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
 export default function SurveyPage() {
-  const { questions, surveyValues, setSurveyValues, postQuestions } =
-    useQestionsAPI(QUESTIONS_URI);
+  const { questions, sendAnswers } = useQestionsAPI();
   const [index, setIndex] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(true);
+  const [isDisplayed, setIsDisplayed] = useState(false);
+  const [surveyValues, setSurveyValues] = useState([]);
   const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const prepareTemplateValues = useCallback((questions) => {
+    const templateValues = questions.map((elem) => {
+      const templateObj = {};
+      templateObj.id = elem.id;
+      templateObj.question = elem.question;
+      templateObj.value = 0;
+      return templateObj;
+    });
+    return templateValues;
+  }, []);
+
+  useEffect(() => {
+    setSurveyValues(prepareTemplateValues(questions));
+  }, [questions, setSurveyValues, prepareTemplateValues]);
 
   useEffect(() => {
     if (surveyValues.length < 1) return;
     const checker = surveyValues.every((e) => e.hasOwnProperty("checked"));
-    if (checker && isDisabled) {
-      setIsDisabled(false);
+    if (checker && !isDisplayed) {
+      setIsDisplayed(true);
     }
-  }, [surveyValues, setSurveyValues, isDisabled]);
+  }, [surveyValues, setSurveyValues, isDisplayed]);
 
-  const toggleModal = useCallback(() => {
+  const toggleModal = useCallback((e) => {
+    e.preventDefault();
     setModalOpen((prev) => !prev);
   }, []);
 
@@ -57,21 +72,21 @@ export default function SurveyPage() {
     setIndex(slide.realIndex + 1);
   }, []);
 
-  // review
   const handleModalSubmit = useCallback(() => {
     const answersToPost = surveyValues.map((e) => {
-      const answers = {};
-      answers.questionId = e.id;
-      answers.value = e.value;
-      return answers;
+      return {
+        questionId: e.id,
+        value: e.value,
+      };
     });
     const objToPost = {
       user: user,
       answers: answersToPost,
     };
 
-    postQuestions(ANSWERS_URI, objToPost);
-  }, [surveyValues, postQuestions, user]);
+    sendAnswers(objToPost);
+    navigate("thankyou", { replace: true });
+  }, [surveyValues, sendAnswers, user, navigate]);
   return (
     <>
       <Description />
@@ -83,41 +98,46 @@ export default function SurveyPage() {
         alignItems="center"
       >
         <Grid item xs={12} sx={{ mt: 10 }}>
-          <Box sx={{ maxWidth: 500 }}>
-            <Paper variant="outlined" sx={{ px: 2, py: 4 }}>
-              <Stack
-                spacing={2}
-                sx={{ mx: "auto", mb: 4, width: "fit-content" }}
-              >
-                <Pagination
-                  count={questions.length}
-                  color="primary"
-                  hideNextButton
-                  hidePrevButton
-                  page={index}
-                  variant="outlined"
-                  sx={{ pointerEvents: "none" }}
-                />
-              </Stack>
-              <SurveyCarousel
-                handleSlideChange={handleSlideChange}
-                handleInputChange={handleInputChange}
-                questions={questions}
-              />
-
-              <Box textAlign="center">
-                <Button
-                  onClick={toggleModal}
-                  disabled={isDisabled}
-                  variant="outlined"
-                  color="primary"
-                  sx={{ mx: "auto" }}
+          <form action="" onSubmit={toggleModal}>
+            <Box sx={{ maxWidth: 550 }}>
+              <Paper variant="outlined" sx={{ px: 2, py: 4 }}>
+                <Stack
+                  spacing={2}
+                  sx={{ mx: "auto", mb: 4, width: "fit-content" }}
                 >
-                  Submit
-                </Button>
-              </Box>
-            </Paper>
-          </Box>
+                  <Pagination
+                    count={questions.length}
+                    color="primary"
+                    hideNextButton
+                    hidePrevButton
+                    page={index}
+                    variant="outlined"
+                    sx={{ pointerEvents: "none" }}
+                    size="large"
+                  />
+                </Stack>
+                <SurveyCarousel
+                  handleSlideChange={handleSlideChange}
+                  handleInputChange={handleInputChange}
+                  questions={questions}
+                />
+
+                <Box textAlign="center">
+                  {isDisplayed && (
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      sx={{ mx: "auto" }}
+                      size="large"
+                    >
+                      Submit
+                    </Button>
+                  )}
+                </Box>
+              </Paper>
+            </Box>
+          </form>
         </Grid>
       </Grid>
       <SurveyModal

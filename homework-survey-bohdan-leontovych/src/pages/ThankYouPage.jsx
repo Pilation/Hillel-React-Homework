@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
 
-export default function Notfoundpage() {
+export default function ThankYouPage() {
   const navigate = useNavigate();
   const handleOnclick = () => navigate("/", { replace: true });
 
@@ -9,9 +9,8 @@ export default function Notfoundpage() {
     <Box
       variant="outlined"
       sx={{
-        p: 4,
+        p: 6,
         mt: 10,
-        width: "fit-content",
         mx: "auto",
         display: "flex",
         flexDirection: "column",
@@ -19,14 +18,14 @@ export default function Notfoundpage() {
         justifyContent: "center",
       }}
     >
-      <Typography
-        variant="h3"
-        component="h1"
-        sx={{ mb: 4 }}
-        color="primary"
-        align="center"
-      >
-        This page doesn't exist
+      <Typography variant="h3" component="h1" color="primary" align="center">
+        Thank you
+      </Typography>
+      <Typography variant="body1" component="p" sx={{ py: 2 }} align="center">
+        Your answers were submitted!
+      </Typography>
+      <Typography variant="body1" component="p" sx={{ pt: 2 }} align="center">
+        Have a very nice day!
       </Typography>
 
       <Button
@@ -34,7 +33,7 @@ export default function Notfoundpage() {
         variant="contained"
         color="primary"
         onClick={handleOnclick}
-        size="large"
+        sx={{ mt: 6 }}
       >
         Go home
       </Button>

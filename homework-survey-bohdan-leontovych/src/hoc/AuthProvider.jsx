@@ -1,17 +1,22 @@
 import { createContext, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export const AuthContext = createContext(null);
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const signin = (newUser, cb) => {
+  const fromPage = location.state?.from?.pathname || "/";
+
+  const signin = (newUser) => {
     setUser(newUser);
-    cb();
+    navigate(fromPage, { replace: true });
   };
-  const signout = (cb) => {
+  const signout = () => {
     setUser(null);
-    cb();
+    navigate("/", { replace: true });
   };
 
   const value = { user, signin, signout };

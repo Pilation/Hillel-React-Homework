@@ -15,7 +15,7 @@ const arrowStyles = {
   position: "static",
   top: "auto",
   margin: "auto",
-  fontSize: 40,
+  fontSize: 60,
 };
 
 export default function SurveyCarousel({
@@ -57,12 +57,14 @@ export default function SurveyCarousel({
           <ArrowCircleLeftIcon
             className="swiper-button-prev"
             sx={arrowStyles}
+            color="primary"
           />
         </IconButton>
         <IconButton size="medium">
           <ArrowCircleRightIcon
             className="swiper-button-next"
             sx={arrowStyles}
+            color="primary"
           />
         </IconButton>
       </Box>

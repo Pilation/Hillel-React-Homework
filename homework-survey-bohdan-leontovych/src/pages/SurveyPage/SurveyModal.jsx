@@ -62,10 +62,14 @@ export default function SurveyModal({
                 pt: 4,
               }}
             >
-              <Button onClick={handleClose} variant="outlined" color="warning">
+              <Button onClick={handleClose} variant="outlined" color="primary">
                 Cancel
               </Button>
-              <Button onClick={handleSubmit} variant="outlined" color="success">
+              <Button
+                onClick={handleSubmit}
+                variant="contained"
+                color="primary"
+              >
                 Submit
               </Button>
             </Box>
