@@ -32,6 +32,10 @@ export default class TodoList extends Component {
         completed: false,
       },
     ],
+
+    translation: {
+      names: [0, 1, 2, { com1: 1, com2: 2, com3: 3 }],
+    },
   };
   constructor() {
     super();
@@ -39,8 +43,21 @@ export default class TodoList extends Component {
     this.onClickRemoveLi = this.onClickRemoveLi.bind(this);
     this.onSubmitAddLi = this.onSubmitAddLi.bind(this);
   }
+  componentDidMount() {
+    // this.setState(translation: );
+    // console.log({ ...this.state.translation });
+    const newTranslation = { ...this.state.translation };
+    newTranslation.names[3].com1 = "huy";
+    this.setState({ translation: newTranslation });
+  }
   render() {
     const { todos } = this.state;
+
+    console.log(this.state);
+
+    // console.log(this.state.translation?.names[3].com1);
+    // translation?.names[3].com1
+
     return (
       <div className="js-TodoList">
         <h1>My plans</h1>
