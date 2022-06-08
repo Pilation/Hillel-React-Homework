@@ -1,14 +1,20 @@
-import { Provider } from "react-redux";
-import store from "./store/store";
-
-import "./App.css";
-import TodoList from "./components/TodoList/TodoList";
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Albums from "./pages/Albums";
+import Users from "./pages/Users/Users";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <Provider store={store}>
-      <TodoList />
-    </Provider>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="albums" element={<Albums />} />
+          <Route path="users" element={<Users />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

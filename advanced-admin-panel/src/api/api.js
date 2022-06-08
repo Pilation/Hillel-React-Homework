@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL, TODOS_URI } from "../constants";
+import { API_URL, USERS_URI, ALBUMS_URI } from "../constants";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -8,18 +8,18 @@ const api = axios.create({
   },
 });
 
-export function getTD() {
-  return api.get(TODOS_URI);
+export function getUsers() {
+  return api.get(USERS_URI);
 }
 
-export function postTD(obj) {
-  return api.post(TODOS_URI, obj);
+export function postUser(obj) {
+  return api.post(USERS_URI, obj);
 }
 
-export function putTD(obj, id) {
-  return api.put(TODOS_URI + "/" + id, obj);
+export function changeUser(obj) {
+  return api.put(USERS_URI, obj);
 }
 
-export function deleteTD(id) {
-  return api.delete(TODOS_URI + "/" + id);
+export function getAlbums(obj) {
+  return api.get(ALBUMS_URI, obj);
 }
